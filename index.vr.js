@@ -85,6 +85,72 @@ export default class musical_exp_react_vr_pusher extends React.Component {
   }
   
   render() {
+	const shapes = [
+      <Cylinder
+        radiusTop={0.2}
+        radiusBottom={0.2}
+        dimHeight={0.3}
+        segments={8}
+        lit={true}
+        style={{
+          color: '#96ff00', 
+          transform: [{translate: [-1.5,-0.2,-2]}, {rotateX: 30}],
+        }}
+      />,
+      <Cylinder
+        radiusTop={0}
+        radiusBottom={0.2}
+        dimHeight={0.3}
+        segments={4}
+        lit={true}
+        style={{
+          color: '#96de4e',
+          transform: [{translate: [-1,-0.5,-2]}, {rotateX: 30}],
+        }}
+      />,
+      <Box
+        dimWidth={0.2}
+        dimDepth={0.2}
+        dimHeight={0.2}
+        lit={true}
+        style={{
+          color: '#a0da90', 
+          transform: [{translate: [-0.5,-0.5,-2]}, {rotateX: 30}],
+        }}
+      />,
+      <Box
+        dimWidth={0.4}
+        dimDepth={0.2}
+        dimHeight={0.2}
+        lit={true}
+        style={{
+          color: '#b7dd60',
+          transform: [{translate: [0,-0.5,-2]}, {rotateX: 30}],
+        }}
+      />,
+      <Sphere
+        radius={0.15}
+        widthSegments={20}
+        heightSegments={12}
+        lit={true}
+        style={{
+          color: '#cee030',
+          transform: [{translate: [0.5,-0.5,-2]}, {rotateX: 30}],
+        }}
+      />,
+      <Cylinder
+        radiusTop={0.2}
+        radiusBottom={0.2}
+        dimHeight={0.3}
+        segments={3}
+        lit={true}
+        style={{
+          color: '#e6e200',
+          transform: [{translate: [1,-0.2,-2]}, {rotateX: 30}],
+        }}
+      />
+	];
+	
     return (
       <View>
         <Pano source={asset('images/background.jpg')} />
@@ -93,104 +159,17 @@ export default class musical_exp_react_vr_pusher extends React.Component {
 
         <SpotLight intensity={1} style={{transform: [{translate: [1, 4, 4]}],}} />
 		
-        <SoundShape 
-		    onClick={() => this.onShapeClicked(0)} 
-		    sound={this.config[0].sound} 
-			playerState={this.config[0].playerState}>
-          <Cylinder
-            radiusTop={0.2}
-            radiusBottom={0.2}
-            dimHeight={0.3}
-            segments={8}
-            lit={true}
-            style={{
-              color: '#96ff00', 
-              transform: [{translate: [-1.5,-0.2,-2]}, {rotateX: 30}],
-            }}
-          />
-        </SoundShape>
-		
-        <SoundShape 
-		    onClick={() => this.onShapeClicked(1)} 
-			sound={this.config[1].sound} 
-			playerState={this.config[1].playerState}>
-          <Cylinder
-            radiusTop={0}
-            radiusBottom={0.2}
-            dimHeight={0.3}
-            segments={4}
-            lit={true}
-            style={{
-              color: '#96de4e',
-              transform: [{translate: [-1,-0.5,-2]}, {rotateX: 30}],
-            }}
-          />
-        </SoundShape>
-		
-        <SoundShape 
-		    onClick={() => this.onShapeClicked(2)} 
-			sound={this.config[2].sound} 
-			playerState={this.config[2].playerState}>
-		  <Box
-            dimWidth={0.2}
-            dimDepth={0.2}
-            dimHeight={0.2}
-            lit={true}
-            style={{
-              color: '#a0da90', 
-              transform: [{translate: [-0.5,-0.5,-2]}, {rotateX: 30}],
-            }}
-          />
-        </SoundShape>
-		
-        <SoundShape 
-		    onClick={() => this.onShapeClicked(3)} 
-			sound={this.config[3].sound} 
-			playerState={this.config[3].playerState}>
-		  <Box
-            dimWidth={0.4}
-            dimDepth={0.2}
-            dimHeight={0.2}
-            lit={true}
-            style={{
-              color: '#b7dd60',
-              transform: [{translate: [0,-0.5,-2]}, {rotateX: 30}],
-            }}
-          />
-        </SoundShape>
-		
-        <SoundShape 
-		    onClick={() => this.onShapeClicked(4)} 
-			sound={this.config[4].sound} 
-			playerState={this.config[4].playerState}>
-		  <Sphere
-            radius={0.15}
-            widthSegments={20}
-            heightSegments={12}
-            lit={true}
-            style={{
-              color: '#cee030',
-              transform: [{translate: [0.5,-0.5,-2]}, {rotateX: 30}],
-            }}
-          />
-        </SoundShape>
-		
-        <SoundShape 
-		    onClick={() => this.onShapeClicked(5)} 
-			sound={this.config[5].sound} 
-			playerState={this.config[5].playerState}>
-		  <Cylinder
-            radiusTop={0.2}
-            radiusBottom={0.2}
-            dimHeight={0.3}
-            segments={3}
-            lit={true}
-            style={{
-              color: '#e6e200',
-              transform: [{translate: [1,-0.2,-2]}, {rotateX: 30}],
-            }}
-            />
-        </SoundShape>
+		{shapes.map((shape, index) => {
+			return (
+		      <SoundShape
+			    key={index}
+		        onClick={() => this.onShapeClicked(index)} 
+		        sound={this.config[index].sound} 
+			    playerState={this.config[index].playerState}>
+				  {shape}
+              </SoundShape>
+		  );
+		})}
       </View>
     );
   }
