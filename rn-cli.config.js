@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var blacklist = require('./node_modules/react-native/packager/blacklist');
+var blacklist = require('metro-bundler/src/blacklist');
 
 var config = {
   getProjectRoots() {
